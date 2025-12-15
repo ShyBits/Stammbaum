@@ -14,45 +14,74 @@
         <nav class="sidebar">
             <h2 class="nav-title">Navigation</h2>
             <div class="nav-buttons">
-                <button class="nav-btn" onclick="showView('overview')">
+                <button class="nav-btn active" id="nav-overview" onclick="showView('overview')">
                     <span class="btn-icon">👥</span>
                     <span class="btn-text">Übersicht</span>
                 </button>
-                <button class="nav-btn" onclick="showView('add')">
+                <button class="nav-btn" id="nav-add" onclick="showView('add')">
                     <span class="btn-icon">➕</span>
                     <span class="btn-text">Person hinzufügen</span>
                 </button>
-                <button class="nav-btn" onclick="showView('relationship')">
+                <button class="nav-btn" id="nav-relationship" onclick="showView('relationship')">
                     <span class="btn-icon">🔗</span>
                     <span class="btn-text">Beziehung hinzufügen</span>
                 </button>
-                <button class="nav-btn" onclick="showView('edit')">
+                <button class="nav-btn" id="nav-edit" onclick="showView('edit')">
                     <span class="btn-icon">✏️</span>
                     <span class="btn-text">Bearbeiten</span>
                 </button>
-                <button class="nav-btn" onclick="showView('search')">
+                <button class="nav-btn" id="nav-search" onclick="showView('search')">
                     <span class="btn-icon">🔍</span>
                     <span class="btn-text">Suchen</span>
                 </button>
-                <button class="nav-btn" onclick="showView('export')">
+                <button class="nav-btn" id="nav-export" onclick="showView('export')">
                     <span class="btn-icon">📥</span>
                     <span class="btn-text">Exportieren</span>
                 </button>
-                <button class="nav-btn" onclick="showView('settings')">
+                <button class="nav-btn" id="nav-settings" onclick="showView('settings')">
                     <span class="btn-icon">⚙️</span>
                     <span class="btn-text">Einstellungen</span>
                 </button>
             </div>
         </nav>
 
-        <!-- Hauptbereich mit Stammbaum -->
+        <!-- Hauptbereich mit Views -->
         <main class="main-content">
-            <header class="header">
-                <h1>Familienstammbaum</h1>
-            </header>
+            <!-- Übersicht - Stammbaum -->
+            <div class="view-container" id="view-overview">
+                <div class="tree-container" id="treeContainer" oncontextmenu="showContextMenu(event, null)">
+                    <!-- Stammbaum wird hier dynamisch eingefügt -->
+                </div>
+            </div>
             
-            <div class="tree-container" id="treeContainer" oncontextmenu="showContextMenu(event, null)">
-                <!-- Stammbaum wird hier dynamisch eingefügt -->
+            <!-- Person hinzufügen -->
+            <div class="view-container" id="view-add" style="display: none;">
+                <?php include 'views/add_person.php'; ?>
+            </div>
+            
+            <!-- Beziehung hinzufügen -->
+            <div class="view-container" id="view-relationship" style="display: none;">
+                <?php include 'views/add_relationship.php'; ?>
+            </div>
+            
+            <!-- Bearbeiten -->
+            <div class="view-container" id="view-edit" style="display: none;">
+                <?php include 'views/edit_person.php'; ?>
+            </div>
+            
+            <!-- Suchen -->
+            <div class="view-container" id="view-search" style="display: none;">
+                <?php include 'views/search.php'; ?>
+            </div>
+            
+            <!-- Exportieren -->
+            <div class="view-container" id="view-export" style="display: none;">
+                <?php include 'views/export.php'; ?>
+            </div>
+            
+            <!-- Einstellungen -->
+            <div class="view-container" id="view-settings" style="display: none;">
+                <?php include 'views/settings.php'; ?>
             </div>
             
             <!-- Context Menu -->
@@ -123,16 +152,17 @@
                                             <option value="grandparent-grandchild-reverse">Enkel von</option>
                                             <option value="uncle-aunt-nephew-niece">Onkel/Tante von</option>
                                             <option value="uncle-aunt-nephew-niece-reverse">Neffe/Nichte von</option>
-                                            <option value="cousin">Cousin/Cousine von (1. Grades)</option>
-                                            <option value="cousin-2">Cousin/Cousine von (2. Grades)</option>
-                                            <option value="cousin-3">Cousin/Cousine von (3. Grades)</option>
-                                            <option value="cousin-4">Cousin/Cousine von (4. Grades)</option>
-                                            <option value="cousin-custom">Cousin/Cousine von (anderer Grad)</option>
+                                            <option value="cousin">Cousin/Cousine von</option>
                                         </optgroup>
                                     </select>
                                     <div id="cousinGradeInput" class="cousin-grade-input" style="display: none;">
-                                        <label for="cousinGrade">Cousin-Grad (z.B. 5, 6, 7...):</label>
-                                        <input type="number" id="cousinGrade" name="cousinGrade" min="1" value="5" style="width: 100px; padding: 0.5rem; margin-top: 0.5rem;">
+                                        <label class="cousin-grade-label">Cousin-Grad</label>
+                                        <div class="cousin-grade-controls">
+                                            <button type="button" class="cousin-grade-btn" onclick="changeCousinGrade(-1)"></button>
+                                            <span id="cousinGradeDisplay">1</span>
+                                            <input type="hidden" id="cousinGrade" name="cousinGrade" value="1">
+                                            <button type="button" class="cousin-grade-btn" onclick="changeCousinGrade(1)"></button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="relationship-item">

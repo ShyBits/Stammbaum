@@ -12,16 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $data = file_get_contents($dataFile);
         echo $data;
     } else {
-        // Beispieldaten
-        $sampleData = [
-            ['id' => 1, 'firstName' => 'Max', 'lastName' => 'Mustermann', 'birthDate' => '1950-01-15', 'deathDate' => '', 'parentId' => null, 'gender' => 'm'],
-            ['id' => 2, 'firstName' => 'Anna', 'lastName' => 'Mustermann', 'birthDate' => '1952-03-20', 'deathDate' => '', 'parentId' => null, 'gender' => 'f'],
-            ['id' => 3, 'firstName' => 'Peter', 'lastName' => 'Mustermann', 'birthDate' => '1975-06-10', 'deathDate' => '', 'parentId' => 1, 'gender' => 'm'],
-            ['id' => 4, 'firstName' => 'Maria', 'lastName' => 'Mustermann', 'birthDate' => '1978-09-25', 'deathDate' => '', 'parentId' => 1, 'gender' => 'f'],
-            ['id' => 5, 'firstName' => 'Lisa', 'lastName' => 'Schmidt', 'birthDate' => '2000-12-05', 'deathDate' => '', 'parentId' => 3, 'gender' => 'f'],
-            ['id' => 6, 'firstName' => 'Tom', 'lastName' => 'Schmidt', 'birthDate' => '2003-04-18', 'deathDate' => '', 'parentId' => 3, 'gender' => 'm']
-        ];
-        echo json_encode($sampleData);
+        // Keine Beispieldaten - starte mit leerem Array
+        echo json_encode([]);
     }
     exit;
 }
